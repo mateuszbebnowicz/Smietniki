@@ -1,24 +1,27 @@
-#include <SFML/Graphics.hpp>
+#include <time.h>
+#include "Map.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	srand(time(NULL));
+	Map mapa(30, 200, 5);
+	
+	sf::RenderWindow window(sf::VideoMode(900, 900), "smieciorze");
+	window.setFramerateLimit(20);
 
 	while (window.isOpen())
 	{
 		sf::Event event;
-		while (window.pollEvent(event))
+		while(window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
 				window.close();
+			}
 		}
-
-		window.clear();
-		window.draw(shape);
-		window.display();
+		mapa.admin(window);
 	}
 
 	return 0;
 }
+
